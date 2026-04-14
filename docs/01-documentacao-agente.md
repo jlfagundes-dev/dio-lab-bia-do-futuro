@@ -5,34 +5,43 @@
 ### Problema
 > Qual problema financeiro seu agente resolve?
 
-[Sua descrição aqui]
+ A maioria dos assistentes atuais é reativa, exigindo que o cliente vá até o app e faça perguntas específicas, sem antecipação de necessidades.
 
 ### Solução
 > Como o agente resolve esse problema de forma proativa?
 
-[Sua descrição aqui]
+O agente atua diretamente no WhatsApp, canal já presente no dia a dia do cliente, eliminando a necessidade de acessar aplicativos bancários.
 
 ### Público-Alvo
 > Quem vai usar esse agente?
 
-[Sua descrição aqui]
+- Clientes que utilizam WhatsApp como principal canal digital
+- Clientes com baixa ou média organização financeira
+- Pequenos empreendedores (PMEs) que precisam de visão rápida do caixa
+- Clientes que não utilizam apps bancários com frequência
 
 ---
 
 ## Persona e Tom de Voz
 
 ### Nome do Agente
-[Nome escolhido]
+ABI (Assistente Bancario Inteligente)
 
 ### Personalidade
 > Como o agente se comporta? (ex: consultivo, direto, educativo)
 
-[Sua descrição aqui]
+- Consultivo
+- Educativo, ajudando o cliente a entender suas finanças
+- Objetivo, evitando excesso de complexidade
+- Não assume riscos ou faz promessas ou sugestões de investimento ou compras
 
 ### Tom de Comunicação
 > Formal, informal, técnico, acessível?
 
-[Sua descrição aqui]
+- Acessível e claro (linguagem)
+- Levemente informal (estilo WhatsApp)
+- Sem jargão financeiro excessivo
+- Didático quando necessário
 
 ### Exemplos de Linguagem
 - Saudação: [ex: "Olá! Como posso ajudar com suas finanças hoje?"]
@@ -46,23 +55,26 @@
 ### Diagrama
 
 ```mermaid
-flowchart TD
-    A[Cliente] -->|Mensagem| B[Interface]
+graph TD
+    A[Canal WhatsApp] -->|Texto ou audio| B[Orquestracao]
     B --> C[LLM]
     C --> D[Base de Conhecimento]
     D --> C
-    C --> E[Validação]
-    E --> F[Resposta]
+    C --> E[Validacao de Regras]
+    E --> F[Resposta em texto ou audio]
+    F --> A
 ```
 
 ### Componentes
 
 | Componente | Descrição |
 |------------|-----------|
-| Interface | [ex: Chatbot em Streamlit] |
-| LLM | [ex: GPT-4 via API] |
-| Base de Conhecimento | [ex: JSON/CSV com dados do cliente] |
-| Validação | [ex: Checagem de alucinações] |
+| Canal WhatsApp | Meio de entrada das mensagens de texto ou áudio do cliente |
+| Orquestração | Recebe a mensagem, encaminha para o LLM e coordena o fluxo |
+| LLM | Interpreta a mensagem e gera a resposta com apoio do contexto |
+| Base de Conhecimento | Dados estruturados e histórico usados como contexto |
+| Validação de Regras | Aplica regras de negócio e controle de confiabilidade |
+| Resposta | Retorno final enviado ao cliente em texto ou áudio pelo canal WhatsApp |
 
 ---
 
@@ -70,12 +82,19 @@ flowchart TD
 
 ### Estratégias Adotadas
 
-- [ ] [ex: Agente só responde com base nos dados fornecidos]
-- [ ] [ex: Respostas incluem fonte da informação]
-- [ ] [ex: Quando não sabe, admite e redireciona]
-- [ ] [ex: Não faz recomendações de investimento sem perfil do cliente]
+- [ ] Agente responde com base em dados estruturados e contexto do cliente
+- [ ] Não inventar dados financeiros
+- [ ] Quando não sabe, admite explicitamente
+- [ ] Não realiza operações financeiras (ex: PIX)
+- [ ] Logs e rastreabilidade das respostas
 
 ### Limitações Declaradas
 > O que o agente NÃO faz?
 
-[Liste aqui as limitações explícitas do agente]
+- Não executa transações financeiras reais (ex: PIX, transferências)
+- Não substitui aplicativos bancários oficiais
+- Não acessa dados bancários reais
+- Não fornece aconselhamento financeiro avançado ou regulado (ex: investimentos complexos)
+- Não garante 100% de precisão sem dados estruturados confiáveis
+- Não substitui um profissional qualificado
+- Não acessa dados bancários sensíveis, como senhas, etc...
